@@ -1,0 +1,27 @@
+.text-primary {
+    color: #FFFFFF !important;
+}
+
+a.text-primary:hover{
+    color: #CCCCCC !important;
+}
+
+a.text-primary:focus{
+    color: #BAE9FF !important;
+}
+
+.text-secondary{
+    color: #CCCCCC !important;
+}
+
+.bg-primary{
+    background-color: #2F2E2E;
+}
+
+.secondary-color {
+    color:#605E5E !important;
+}
+
+.primary-color {
+    color:#103F54 !important;
+}

@@ -1,0 +1,31 @@
+body{
+  background-color: #2F2E2E;
+}
+
+
+.svg-container {
+    position: absolute;
+}
+
+.svg-image {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 85px;
+  height: 100%;
+  transition: opacity 0.2s linear;
+  opacity:1;
+}
+
+@media only screen and (max-width: 300px){
+  .svg-image {
+    opacity:0;
+    transition: opacity 0.2s linear;
+  }
+}
+
+.text-header {
+  color: #207EA9
+}
+
+
