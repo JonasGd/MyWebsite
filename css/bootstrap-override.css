@@ -14,14 +14,34 @@ a.text-primary:focus{
     color: #CCCCCC !important;
 }
 
-.bg-primary{
-    background-color: #2F2E2E;
+a.text-secondary{
+    color: #CCCCCC !important;
 }
+
+.text-ternary{
+    color:black;
+}
+
+a{
+    color: #CCCCCC !important;
+    text-decoration:none !important;
+    font-weight: bold;
+}
+
 
 .secondary-color {
     color:#605E5E !important;
 }
 
+.bg-primary {
+    background-color: #CCCCCC !important;
+}
+
+.bg-secondary {
+    background-color: #4D4B4B !important;
+}
+
 .primary-color {
     color:#103F54 !important;
 }
+
