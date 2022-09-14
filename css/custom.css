@@ -69,3 +69,19 @@ header{
 }
 
 
+
+.img-zoom, .img-zoom2 {
+  transform-origin: center center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+#img-container, #img-container2 {
+  overflow: hidden;
+  height:100%;
+  width: 100%;
+}
+
+
+
