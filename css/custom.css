@@ -1,8 +1,39 @@
 body{
   background-color: #2F2E2E;
   color: white;
+  font-family: 'metropolis', sans-serif;
 }
 
+@font-face {
+  font-family: 'metropolis';
+  src: url(../data/fonts/Metropolis-Medium.otf) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'metropolis';
+  src: url(../data/fonts/Metropolis-Bold.otf) format('opentype');
+  font-weight:bold;
+  font-style:normal;
+}
+@font-face {
+  font-family: 'metropolis';
+  src: url(../data/fonts/Metropolis-Light.otf) format('opentype');
+  font-weight:lighter;
+  font-style:normal;
+}
+@font-face {
+  font-family: 'metropolis';
+  src: url(../data/fonts/Metropolis-RegularItalic.otf) format('opentype');
+  font-weight:normal;
+  font-style:italic;
+}
+
+
+header{
+  font-family: 'metropolis', sans-serif;
+}
 
 .svg-container {
     position: absolute;
@@ -23,6 +54,25 @@ body{
     opacity:0;
     transition: opacity 0.2s linear;
   }
+}
+
+@media only screen and (min-width:768px){
+  .nav-divider{
+    display:none;
+  }
+  .nav-languages{
+    position: absolute;
+    top:23px;
+    left:100%;
+    margin-left:10px;
+    
+  }
+}
+
+
+.vl{
+  border-left:solid #CCCCCC;
+  height:40px;
 }
 
 .text-header {
@@ -73,6 +123,12 @@ body{
   overflow: hidden;
   height:100%;
   width: 100%;
+}
+
+.pop, .pop2 {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 
