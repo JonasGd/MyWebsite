@@ -100,23 +100,24 @@
 
     <main class="container" role="main">
         <h2>Compositions</h2>
-        <p>text about my composition style</p>
+        <p>My compositions are a mixture of many different styles. I find inspiration is in post-romantic composers like Messiaen, Poulenc as well as in different tonal systems, but also in romanticism and renaissance music. 
+            The music is mostly very emotional (in a broad sense of that word) but also sometimes more intellectual. It is music that, when created with others, is really a work not only of myself, but for that musician or group of musicians.
+        </p>
 
-          <div id="popover-content" class="d-none">
+        <div id="popover-content" class="d-none">
             <div class="form-group" style="padding-left:0px">
                 <div class='row'><div class='col-6'>
-                    <a href="#!" class="pop" id="pop"><img src='/data/images/test1.png' width='100%'/></a></div><div class='col-6'>
-                    <a href="#!" class="pop2" id="pop2"><img src='/data/images/test2.jpg' width='100%'/></a></div></div>
+                    <a href="#!" class="pop1" id="pop1"><img src="" width='100%'/></a></div><div class='col-6'>
+                    <a href="#!" class="pop2" id="pop2"><img src="" width='100%'/></a></div></div>
             </div>
-          </div>
-
+        </div>
 
         <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" id = "modal-content">
                 <div class="modal-body">
                     <div id="carouselControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" style = "width: 100%">
                             <div class="carousel-item" id="img-container">
                                 <img class="w-100 img-zoom imagepreview" src="">
                             </div>
@@ -152,33 +153,71 @@
                   <ul class="mb-3">
                     <li><div class="row"><div class="col">
                         <p class="mb-0"><i>Rose Blanche</i> for solo guitar [Op. 4] 
-
-                            <a tabindex="0" class="btn btn-secondary ms-2" data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
-                                Preview
+                            <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Rose Blanche"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
                             </a>
                         </p> 
                         <p style="text-indent:140px;">(6 min. 1 mov.)
                         </p></div></div>
                     </li>
-
                       
                     <li><div class="row"><div class="col">
-                        <p class="mb-0"><i>Gone in Thought</i> for solo guitar [Op. 8]</p>
+                        <p class="mb-0"><i>Gone in Thought</i> for solo guitar [Op. 8]
+                        
+                            <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Gone in Thought"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+
+                            </a>
+                        </p>
                         <p style="text-indent:140px;">(5 min. 1 mov.)</p></div>
-                    <div class="col"><audio controls>
+                    <div class="col"><audio controls style ="width:min(100%,300px)">
                         <source src="/data/audio/Gone in thought.mp3" type="audio/mp3">
                         </audio></div></div>
                     </li>
 
                     <li><div class="row"><div class="col">
-                        <p class="mb-0"><i>Vita Musici</i> for solo guitar [Op. 12]</p>
+                        <p class="mb-0"><i>Vita Musici</i> for solo guitar [Op. 12]
+                            <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Vita Musici"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+
+                            </a>
+                        </p>
                         <p style="text-indent:140px;">(13 min. 1 mov.)</p></div>
-                    <div class="col"><audio controls>
+                    <div class="col"><audio controls style ="width:min(100%,300px)">
                         <source src="/data/audio/vita musici.mp3" type="audio/mp3">
                         </audio></div></div>
                     </li>
                     <li><div class="row"><div class="col">
-                        <p class="mb-0"><i>Tres Canciones Tristes</i> for solo guitar [Op. 3]</p>
+                        <p class="mb-0"><i>Tres Canciones Tristes</i> for solo guitar [Op. 3]
+                            <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Canciones Tristes"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+
+                            </a>
+                        </p>
                         <p style="text-indent:140px;">(10 min. 3 mov.)
                         </p></div></div>
                     </li>
@@ -197,12 +236,34 @@
                     <p>Two musicians</p>
                     <ul class="mb-3">
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Into the woods</i> for guitar and marimba [Op. 6]</p>
+                            <p class="mb-0"><i>Into the woods</i> for guitar and marimba [Op. 6]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Into the woods"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(9 min. 4 mov.)
                             </p></div></div>
                         </li>
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Fable (The Fox and the Lumberjack)</i> for two guitars [Op. 1]</p>
+                            <p class="mb-0"><i>Fable (The Fox and the Lumberjack)</i> for two guitars [Op. 1]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/De vos en de houthakker"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(5 min. 1 mov.)
                             </p></div></div>
                         </li>
@@ -210,9 +271,19 @@
                     <p>Four musicians</p>
                     <ul class="mb-3">
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>PYR</i> for guitar quartet [Op. 2]</p>
+                            <p class="mb-0"><i>PYR</i> for guitar quartet [Op. 2]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/PUR"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                            </p>
                             <p style="text-indent:140px;">(20 min. 3 mov.)</p></div>
-                        <div class="col"><audio controls>
+                        <div class="col"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Pyr.mp3" type="audio/mp3">
                             </audio></div></div>
                         </li>
@@ -220,7 +291,17 @@
                     <p>Seven musicians</p>
                     <ul class="mb-3">
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Lone Tear</i> for string quartet, flute, clarinet and oboe [Op. 5]</p>
+                            <p class="mb-0"><i>Lone Tear</i> for string quartet, flute, clarinet and oboe [Op. 5]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Lone Tear"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                            </p>
                             <p style="text-indent:140px;">(5 min. 1 mov.)
                             </p></div></div>
                         </li>
@@ -237,25 +318,66 @@
               <div id="collapseVocal" class="accordion-collapse collapse" aria-labelledby="vocal" data-bs-parent="#listofcompositions">
                 <div class="accordion-body">
                     <ul class="mb-3">
-                        <li><div class="row"><div class="col-4">
-                            <p class="mb-0"><i>Je bent doelwit/Tu es cible/Du bist Zielscheibe</i> for soprano and two guitars [Op. 9]</p>
+                        <li><div class="row"><div class="col-6">
+                            <p class="mb-0"><i>Je bent doelwit/Tu es cible/Du bist Zielscheibe</i> for soprano and two guitars [Op. 9]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Je bent Doelwit - 1"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Je bent Doelwit - 2"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                            </p>
                             <p style="text-indent:140px;">(17 min. 5 mov.)</p></div>
-                        <div class="col-4"><audio controls>
+                        <div class="col-3"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Tu es cible.mp3" type="audio/mp3">
                             </audio></div>
-                        <div class="col-4"><audio controls>
+                        <div class="col-3"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Tu es cible5.mp3" type="audio/mp3">
                             </audio></div></div>
                         </li>
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Deux Chansons de Sentiment</i> for mezzo-soprano, harp and cello [Op. 13]</p>
+                            <p class="mb-0"><i>Deux Chansons de Sentiment</i> for mezzo-soprano, harp and cello [Op. 13]
+                            
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Deux Chansons de Sentiment"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+    
+                                </a></p>
                             <p style="text-indent:140px;">(8 min. 2 mov.)
                             </p></div></div>
                         </li>
-                        <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>The Privet and the Blackbird</i> for soprano, string quartet and piano [Op. 14]</p>
+                        <li><div class="row"><div class="col-8">
+                            <p class="mb-0"><i>The Privet and the Blackbird</i> for soprano, string quartet and piano [Op. 14]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/The Privet and the Blackbird"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(4 min. 1 mov.)</p></div>
-                        <div class="col"><audio controls>
+                        <div class="col-4"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/privet and the blackbird.mp3" type="audio/mp3">
                             </audio></div></div>
                         </li>
@@ -273,30 +395,82 @@
                   <div class="accordion-body">
                     <ul class="mb-3">
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Excitation</i> for mixed choir [Op. 10]</p>
+                            <p class="mb-0"><i>Excitation</i> for mixed choir [Op. 10]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Excitation"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(3 min. 1 mov.)
                             </p></div></div>
                         </li>
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Peace flows into me</i> for male choir [Op. 11]</p>
+                            <p class="mb-0"><i>Peace flows into me</i> for male choir [Op. 11]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Peace flows into me"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                            </p>
                             <p style="text-indent:140px;">(4 min. 1 mov.)
                             </p></div></div>
                         </li>
                         <li><div class="row"><div class="col">
-                            <p class="mb-0"><i>Silence</i> for mixed choir [Op. 7]</p>
+                            <p class="mb-0"><i>Silence</i> for mixed choir [Op. 7]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Silence"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(3 min. 30,  1 mov.)
                             </p></div></div>
                         </li>
                         <li><div class="row"><div class="col-12">
-                            <p class="mb-0"><i>Three Songs on a Scandinavian Christmas</i> for male choir [Op. 15]</p>
+                            <p class="mb-0"><i>Three Songs on a Scandinavian Christmas</i> for male choir [Op. 15]
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Three Songs on a Scandinavian Christmas - 1"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                                <a tabindex="0" class="btn btn-secondary ms-2 preview-button" style ="width: 46px; height: 46px; position: relative " link="/data/images/Previews/Three Songs on a Scandinavian Christmas - 2"  data-bs-trigger="focus" data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#!" id="login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-left:-12px; margin-top: 2px" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" style ="position:absolute; margin-top:16px" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+    
+                            </p>
                             <p style="text-indent:140px;">(17 min. 3 mov.)</p></div>
-                        <div class="col-4"><audio controls>
+                        <div class="col-4"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Three songs on a Scandinavian Christmas1.mp3" type="audio/mp3">
                             </audio></div>
-                        <div class="col-4"><audio controls>
+                        <div class="col-4"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Three songs on a Scandinavian Christmas2.mp3" type="audio/mp3">
                             </audio></div>
-                        <div class="col-4"><audio controls>
+                        <div class="col-4"><audio controls style ="width:min(100%,300px)">
                             <source src="/data/audio/Three songs on a Scandinavian Christmas3.mp3" type="audio/mp3">
                             </audio></div></div>
                         </li>
@@ -342,23 +516,57 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+        document.addEventListener('play', function(e) {
+           var audios = document.getElementsByTagName('audio');
+
+           for (var i = 0, len = audios.length; i < len; i++) {
+                if (audios[i] != e.target) {
+                audios[i].pause();
+                }
+            }
+        }, true);
+    </script>
+    <script>
     $(function() {
         $("[data-toggle=popover]").popover({
           html: true,
           content: function() {
+            $('#pop1').find('img').attr('src',$(this).attr('link') + '/Preview1.jpg');
+            $('#pop2').find('img').attr('src',$(this).attr('link') + '/Preview2.jpg');
             return $('#popover-content').html();
           }
         });
-        $(document).on('click', '#pop', function() {
-                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
-                $('.imagepreview2').attr('src',$(this).find('img').attr('src').substring(0,$(this).find('img').attr('src').lastIndexOf('/')) + '/test2.jpg');
-                document.getElementById("img-container").classList.add("active");
+        $(document).on('click', '#pop1', function() {
+            console.log($(window).height()*(210/297)>$(window).width())
+            document.getElementById("img-container2").classList.remove("active");
+            $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+            if($(window).height()*(210/297)<$(window).width()){
+                $('.imagepreview').height($(window).height()*0.9)
+            }else{
+                $('.imagepreview').height($(window).width()*0.93*(297/210))
+            }
+            $('.imagepreview2').attr('src',$(this).find('img').attr('src').substring(0,$(this).find('img').attr('src').lastIndexOf('/')) + '/Preview2.jpg');
+            if($(window).height()*(210/297)<$(window).width()){
+                $('.imagepreview2').height($(window).height()*0.9)
+            } else{
+                $('.imagepreview2').height($(window).width()*0.93*(297/210))
+            }
+            document.getElementById("img-container").classList.add("active");
+            if($(window).height()*(210/297)<$(window).width()){
+                $('.modal-content').width($(window).height()*0.93*(210/297))
+            } else {
+                $('.modal-content').width($(window).width()*0.9)
+            }
                 $('#imagemodal').modal('show');   
         });	
         $(document).on('click', '#pop2', function() {
+                document.getElementById("img-container").classList.remove("active");
                 $('.imagepreview2').attr('src', $(this).find('img').attr('src'));
-                $('.imagepreview').attr('src',$(this).find('img').attr('src').substring(0,$(this).find('img').attr('src').lastIndexOf('/')) + '/test1.png');
+                $('.imagepreview2').height($(window).height()*0.9)
+                $('.imagepreview').attr('src',$(this).find('img').attr('src').substring(0,$(this).find('img').attr('src').lastIndexOf('/')) + '/Preview1.jpg');
+                $('.imagepreview').height($(window).height()*0.9)
                 document.getElementById("img-container2").classList.add("active");
+                $('.modal-content').width($(window).height()*0.93*(210/297))
                 $('#imagemodal').modal('show');   
         });	
       });
@@ -375,18 +583,22 @@
         container2.addEventListener("mouseover", onZoom);
         container2.addEventListener("mouseleave", offZoom);
         function onZoom(e) {
-            const x = e.clientX - (document.body.clientWidth-e.target.offsetWidth)/2;
+            const scale1 = ($("#modal-content").height()-32)/img.clientHeight
+            const scale2 = ($("#modal-content").height()-32)/img2.clientHeight
+            const x = e.clientX - (document.body.clientWidth-500)/2;
             const y = e.clientY - e.target.offsetTop-45;
             img.style.transformOrigin = `${x}px ${y}px`;
-            img.style.transform = "scale(2.5)";
+            img.style.transform = "scale("+2.5*scale1+")";
             img2.style.transformOrigin = `${x}px ${y}px`;
-            img2.style.transform = "scale(2.5)";
+            img2.style.transform = "scale("+2.5*scale2+")";
         }
         function offZoom(e) {
+            const scale1 = ($("#modal-content").height()-32)/img.clientHeight
+            const scale2 = ($("#modal-content").height()-32)/img2.clientHeight
             img.style.transformOrigin = `center center`;
-            img.style.transform = "scale(1)";
+            img.style.transform = "scale("+scale1+")";
             img2.style.transformOrigin = `center center`;
-            img2.style.transform = "scale(1)";
+            img2.style.transform = "scale("+scale2+")";
 }
     </script>
 

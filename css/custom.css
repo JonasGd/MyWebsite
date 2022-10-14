@@ -1,5 +1,5 @@
 body{
-  background-color: white;
+  background-color: #2F2E2E;
   color: white;
   font-family: 'metropolis', sans-serif;
 }
@@ -125,7 +125,7 @@ header{
   width: 100%;
 }
 
-.pop, .pop2 {
+.pop1, .pop2 {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
