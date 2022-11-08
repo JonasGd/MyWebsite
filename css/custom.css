@@ -30,13 +30,13 @@ body{
   font-style:italic;
 }
 
-
 header{
   font-family: 'metropolis', sans-serif;
 }
 
 .svg-container {
     position: absolute;
+    width: 50%;
 }
 
 .svg-image {
