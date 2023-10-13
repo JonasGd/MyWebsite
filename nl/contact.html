@@ -6,18 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jonas Gedeshi - Componist/Koordirigent/Gitarist</title>
-    <link rel="shortcut icon" type="image/x-icon" href = "/data/icon/noun-composer-298473.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href = "../data/icon/noun-composer-298473.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/bootstrap-override.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/bootstrap-override.css">
 </head>
 
 <body>
     <header>
         <div class="container">
             <div class="row mt-5">
-                <div class="svg-container" style="margin-top:-8px; margin-left:40px">
-                    <img class="svg-image" src="/data/icon/treble-clef.svg" style="transform: rotate(15deg)"> 
+                <div class="svg-container" style="margin-top:-8px; margin-left:40px; width: 50%">
+                    <img class="svg-image" src="../data/icon/treble-clef.svg" style="transform: rotate(15deg)"> 
                 </div>
                 <div class="col-9 col-sm-10 col-md-11">
                     <div class="row">
@@ -87,7 +87,7 @@
                         <hr class="border-top nav-divider" style="width:100px">
                         <li class="nav-item nav-languages mb-3">
                             <div style="display:flex;">
-                           <a class="nav-link" href="#!">NL</a><div class="vl mx-2"></div><a class="nav-link active" href="../en/contact">EN </a>
+                           <a class="nav-link active" href="#!">NL</a><div class="vl mx-2"></div><a class="nav-link" href="../en/contact">EN </a>
                             </div>
                         </li>
                     </ul>
@@ -111,6 +111,7 @@
                 <input type="text" class="form-control mt-2" id="subject" placeholder="Onderwerp" name="subject">
                 <textarea class="form-control mt-2" id="message" placeholder="Bericht *" rows="5" name="message" required></textarea>
                 <div class="invalid-feedback">Gelieve uw bericht toe te voegen</div>
+                <input type="hidden" name="language" value="nl">
 
                 <button class="btn btn-primary btn-lg mt-2" type="submit">Verzenden</button>
             </form>
@@ -123,16 +124,17 @@
                 <div class="invalid-feedback ">Geldige naam is vereist</div>
                 <input type="email" class="form-control mt-2" id="email" placeholder="Emailadres *" name="email" required>
                 <div class="invalid-feedback">Geldig mailadres is vereist</div>
-                <select class="form-select mt-2" id="subject" required>
+                <select class="form-select mt-2" id="subject" name="subject" required>
                     <option value="">Onderwerp *</option>
-                    <option>Bestel een Compositie</option>
-                    <option>Informeer naar Commissies</option>
+                    <option value="Bestel een Compositie">Bestel een Compositie</option>
+                    <option value="Informeer naar Commissies">Informeer naar Commissies</option>
                 </select>
                 <div class="invalid-feedback">Gelieve het onderwerp te selecteren</div>
                 <input type="text" class="form-control mt-2" id="instrumentation" placeholder="Instrumentatie" name="instrumentation">
                 <textarea class="form-control mt-2" id="details" placeholder="Details over Bestellen/Informeren *" rows="3" name="details" required></textarea>
                 <div class="invalid-feedback">Gelieve de vereiste details toe te voegen</div>
                 <textarea class="form-control mt-2" id="message" placeholder="Bericht" rows="2" name="message"></textarea>
+                <input type="hidden" name="language" value="nl">
 
 
                 <button class="btn btn-primary btn-lg mt-2" type="submit">Verzenden</button>
@@ -146,22 +148,23 @@
                 <div class="invalid-feedback">Geldige naam is vereist</div>
                 <input type="email" class="form-control mt-2" id="email" placeholder="Emailadres *" name="email" required>
                 <div class="invalid-feedback">Geldig mailadres is vereist</div>
-                <select class="form-select mt-2" id="subject" required>
+                <select class="form-select mt-2" id="subject" name="subject" required>
                     <option value="">Onderwerp *</option>
-                    <option>Bestel een Partituur</option>
-                    <option>Informeer naar Partituren</option>
+                    <option value="Bestel een Partituur">Bestel een Partituur</option>
+                    <option value="Informeer naar Partituren">Informeer naar Partituren</option>
                 </select>
                 <div class="invalid-feedback">Gelieve het onderwerp te selecteren</div>
                 <input type="text" class="form-control mt-2" id="title" placeholder="Titel van Compositie(s)" name="title">
-                <select class="form-select mt-2" id="purpose">
+                <select class="form-select mt-2" id="purpose" name="purpose">
                     <option value="">(Doel)</option>
-                    <option>Mogelijke Uitvoering</option>
-                    <option>Onderzoek</option>
-                    <option>Persoonlijke Collectie</option>
-                    <option>Andere</option>
+                    <option value="Mogelijke Uitvoering">Mogelijke Uitvoering</option>
+                    <option value="Onderzoek">Onderzoek</option>
+                    <option value="Persoonlijke Collectie">Persoonlijke Collectie</option>
+                    <option value="Andere">Andere</option>
                 </select>
                 <textarea class="form-control mt-2" id="message" placeholder="Bericht" rows="3" name="message" required></textarea>
                 <div class="invalid-feedback">Gelieve een bericht toe te voegen met de benodigde informatie</div>
+                <input type="hidden" name="language" value="nl">
 
                 <button class="btn btn-primary btn-lg mt-2" type="submit">Verzenden</button>
             </form>
@@ -197,7 +200,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="scripts/form-validation.js"></script>
+    <script src="../scripts/form-validation.js"></script>
 </body>
 
 </html>
