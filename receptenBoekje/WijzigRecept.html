@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ons Receptenboekje</title>
+    <link rel="shortcut icon" type="image/x-icon" href = "resources/Logo.png"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/receptenKies.css">
+</head>
+
+<body>
+    <div class="container-fluid header" style="width: 100%">
+        <div class="container header">
+            <header class="flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a href="ReceptenKiesCategorie" class="navbar-brand d-flex align-items-center mb-3 mb-md-0 me-0 me-md-auto text-dark text-decoration-none header">
+                            <img src="resources/Logo.png" class="bi me-2 header" width="60" height="48"></img>
+                            <span class="fs-4 header">Ons Receptenboekje</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mt-1 ms-5 header" style="width: 100%">
+                                <li class="nav-item header"><a href="ReceptenOverzicht?foodCategoryId=0" class="nav-link active header" aria-current="page">Recepten</a></li>
+                                <li class="nav-item header"><a href="#" class="nav-link header">Boodschappenlijstje</a></li>
+                                <li class="nav-item header mt-2 ms-lg-auto" id="loginDropdown"><div id="loginLogout"></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <main class="main-content container-fluid" role="main">
+        <div class="container">
+            <div class="row mb-2">
+                <div class= "col-9">
+                    <h1 id="recipeName" class="mb-5" style="font-weight:bolder">Nieuw Recept</h1>
+                </div>
+            </div>
+            <form class="form card needs-validation" action="javascript:" onsubmit="submitRecipe(this)" novalidate="novalidate">
+                <div class="row mb-4">
+                    <div class="col-md-auto"><label for="Naam" class="form-label">Naam <span style="color:red;">*</span></label></div>
+                    <div class="col-md"><input type="text" class="form-control" id="Naam" name="name" required></div>
+                </div>
+                <div class="row mb-md-4 mb-5">
+                    <div class="col-auto"><label for="Prep" class="form-label">Prep <span style="color:red;">*</span></label></div>
+                    <div class="col col-md-1"><input type="text" class="form-control" id="Prep" name="prep" required></div>
+                    <div class="col-md-1 my-md-0 my-2" style="text-align: center;">|</div>
+                    <div class="col-auto"><label for="Kooktijd" class="form-label">Kooktijd</label></div>
+                    <div class="col col-md-1"><input type="text" class="form-control" id="Kooktijd" name="cookingMinutes"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-auto mt-3 mt-md-0"><label for="Personen" class="form-label">Aantal personen <span style="color:red;">*</span></label></div>
+                    <div class="col-md"><span id="peopleFed"></span></div>
+                </div>
+                <div class="row mb-md-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-auto"><label for="Categorie" class="form-label">Categorie <span style="color:red;">*</span></label></div>
+                            <div class="col-md">
+                                <select class="form-select" id="Categorie" name="category" required>
+                                    <option value="">(Selecteer Categorie)</option>
+                                    <option value="1">Ontbijt</option>
+                                    <option value="2">Lunch</option>
+                                    <option value="3">Voorgerecht</option>
+                                    <option value="4">Hoofdgerecht</option>
+                                    <option value="5">Dessert</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="SubCategoryHoofdgerecht" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-auto"><label for="SubCategorieHoofdgerecht" class="form-label">Subcategorie (hoofdgerecht) <span style="color:red;">*</span></label></div>
+                            <div class="col-md">
+                                <select class="form-select" id="SubCategorieHoofdgerecht" name="subCategoryMainId">
+                                    <option value="">(Kies Categorie)</option>
+                                    <option value="4">Italiaans</option>
+                                    <option value="2">Mexicaans</option>
+                                    <option value="3">Albanees</option>
+                                    <option value="5">Mediteraans</option>
+                                    <option value="8">Aziatisch</option>
+                                    <option value="1">Vlaams</option>
+                                    <option value="6">Andere</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="SubCategoryLunch" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-auto"><label for="SubCategorieLunch" class="form-label">Subcategorie (lunch) <span style="color:red;">*</span></label></div>
+                            <div class="col-md">
+                                <select class="form-select" id="SubCategorieLunch" name="subCategoryLunchId">
+                                    <option value="">(Kies Categorie)</option>
+                                    <option value="3">Salade</option>
+                                    <option value="4">Soep</option>
+                                    <option value="1">Wrap</option>
+                                    <option value="2">Pizza</option>
+                                    <option value="7">Broodjes</option>
+                                    <option value="6">Andere</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="SubCategoryDessert" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-auto"><label for="SubCategorieDessert" class="form-label">Subcategorie (dessert) <span style="color:red;">*</span></label></div>
+                            <div class="col-md">
+                                <select class="form-select" id="SubCategorieDessert" name="subCategoryDessertId" required>
+                                    <option value="">(Kies Categorie)</option>
+                                    <option value="2">Koekjes</option>
+                                    <option value="9">Brownies - Blondies</option>
+                                    <option value="1">Cake - Muffins - Crumble</option>
+                                    <option value="7">Taart</option>
+                                    <option value="4">Bladerdeeggebakken</option>
+                                    <option value="5">Wafels - Pannenkoeken</option>
+                                    <option value="6">Ijs</option>
+                                    <option value="3">Andere</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="SubCategoryStarter" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-auto"><label for="SubCategorieVoorgerecht" class="form-label">Subcategorie (aperitief) <span style="color:red;">*</span></label></div>
+                            <div class="col-md">
+                                <select class="form-select" id="SubCategorieVoorgerecht" name="subCategoryStarterId" required>
+                                    <option value="">(Kies Categorie)</option>
+                                    <option value="1">Voorgerecht</option>
+                                    <option value="2">Hapje</option>
+                                    <option value="3">Aperitief - Drankje</option>
+                                    <option value="4">Andere</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label for="Afbeelding" class="form-label">Afbeelding URL (optioneel)</label>
+                        <input type="text" class="form-control" id="Afbeelding" name="image">
+                    </div>
+                    <div class="col" style="text-align: end; margin-top:30px;">
+                        <a onclick="comfortOnClick()" style="cursor: pointer;">
+                        <span id="isComfortFood" class="icon-comfort2-inactive ms-2" style="font-size: 32px;"></span></a>
+                        <a onclick="favouriteOnClick()" style="cursor: pointer;">
+                        <span id="isFavourite" class="icon-heart2-inactive ms-2" style="font-size: 32px;"></span></a>
+                    </div>
+                </div>
+            </form>
+                <div class="row mb-4">
+                    <div class="col-md-6 pe-md-0">
+                        <form class="form card needs-validation" action="javascript:" onsubmit="addIngredientFromForm(this)" novalidate="novalidate">
+                        <span style="font-weight:800; color: #4f575e;">INGREDIËNTEN</span>
+                        <table class="table table-ingredients" id="ingredients" cellspacing="0" cellpadding="2" style="border-radius:0px; border:0px;"></table>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                <label for="Hoeveelheid" class="form-label">Hoeveelheid</label>
+                                <input type="text" class="form-control" id="Hoeveelheid" name="quantity">
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="Eenheid" class="form-label">Eenheid</label>
+                                <input type="text" class="form-control" id="Eenheid" name="unit">
+                            </div>
+                            <div class="col-10 col-md-4">
+                                <label for="Ingredient" class="form-label">Ingrediënt</label>
+                                <input type="text" class="form-control" id="Ingredient" name="ingredient">
+                            </div>
+                            <div class="col-2 col-md-1">
+                                <button class="btn btn-primary" style="margin-top:31px">+</button>
+                            </div>
+                        </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="newIngredientModal" tabindex="-1" aria-labelledby="newIngredientLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="newIngredientLabel">Nieuw Ingrediënt Toevoegen</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label for="ingredientName">Ingrediënt</label>
+                                                <input type="text" readonly class="form-control-plaintext" id="ingredientName">
+                                            </div>
+                                            <div class="col-8">
+                                                <label for="ingredientCategoryList" class="form-label">Ingrediënt categorie</label>
+                                                <input class="form-control" list="datalistOptions" id="ingredientCategoryList" placeholder="Typ om te zoeken...">
+                                                <datalist id="datalistOptions">
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                                    <button type="button" class="btn btn-primary" onclick="addIngredientCategory()">Opslaan</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="newIngredientCategoryModal" tabindex="-2" aria-labelledby="newIngredientCategoryLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="newIngredientCategoryLabel">Nieuwe Ingrediënt Categorie Toevoegen</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label for="ingredientCategoryName">Ingrediënt Categorie</label>
+                                                <input type="text" readonly class="form-control-plaintext" id="ingredientCategoryName">
+                                            </div>
+                                            <div class="col-8">
+                                                <label for="ingredientMainCategoryList" class="form-label">Ingrediënt Hoofdcategorie</label>
+                                                <select class="form-select" id="ingredientMainCategoryList">
+                                                    <option selected>Selecteer een Hoofdcategorie</option>
+                                                    <option value="1">Fruit en Groenten</option>
+                                                    <option value="4">Koolhydraten</option>
+                                                    <option value="3">Kruiden en Sauzen</option>
+                                                    <option value="2">Vlees en Vis</option>
+                                                    <option value="5">Zuivel en Eieren</option>
+                                                    <option value="6">Bakken</option>
+                                                    <option value="7">Andere</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Terug</button>
+                                    <button type="button" class="btn btn-primary" onclick="addNewIngredientCategory()">Opslaan</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 ps-md-0">
+                        <form class="form card needs-validation" action="javascript:" onsubmit="submitRecipe(this)" novalidate="novalidate">
+                            <span style="font-weight:800; color: #4f575e;">BEREIDING</span>
+                            <div class="row mb-4">
+                                <div class="col-1" style="white-space: nowrap;"><label for="firstStep"><span style="display:inline-block">1. </span><span style="color:red; display: inline-block;">*</span></label></div>
+                                <div class="col"><textarea class="form-control" id="firstStep" rows="3" required></textarea></div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-1"><label for="secondStep" id="secondStepLabel">2.</label></div>
+                                <div class="col"><textarea class="form-control" id="secondStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="thirdStepRow">
+                                <div class="col-1"><label for="thirdStep" id="thirdStepLabel">3.</label></div>
+                                <div class="col"><textarea class="form-control" id="thirdStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="fourthStepRow">
+                                <div class="col-1"><label for="fourthStep" id="fourthStepLabel">4.</label></div>
+                                <div class="col"><textarea class="form-control" id="fourthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="fifthStepRow">
+                                <div class="col-1"><label for="fifthStep" id="fifthStepLabel">5.</label></div>
+                                <div class="col"><textarea class="form-control" id="fifthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="sixthStepRow">
+                                <div class="col-1"><label for="sixthStep" id="sixthStepLabel">6.</label></div>
+                                <div class="col"><textarea class="form-control" id="sixthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="seventhStepRow">
+                                <div class="col-1"><label for="seventhStep" id="seventhStepLabel">7.</label></div>
+                                <div class="col"><textarea class="form-control" id="seventhStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="eighthStepRow">
+                                <div class="col-1"><label for="eighthStep" id="eighthStepLabel">8.</label></div>
+                                <div class="col"><textarea class="form-control" id="eighthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="ninthStepRow">
+                                <div class="col-1"><label for="ninthStep" id="ninthStepLabel">9.</label></div>
+                                <div class="col"><textarea class="form-control" id="ninthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="tenthStepRow">
+                                <div class="col-1"><label for="tenthStep" id="tenthStepLabel">10.</label></div>
+                                <div class="col"><textarea class="form-control" id="tenthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="eleventhStepRow">
+                                <div class="col-1"><label for="eleventhStep" id="eleventhStepLabel">11.</label></div>
+                                <div class="col"><textarea class="form-control" id="eleventhStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="twelfthStepRow">
+                                <div class="col-1"><label for="twelfthStep" id="twelfthStepLabel">12.</label></div>
+                                <div class="col"><textarea class="form-control" id="twelfthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="thirteenthStepRow">
+                                <div class="col-1"><label for="thirteenthStep" id="thirteenthStepLabel">13.</label></div>
+                                <div class="col"><textarea class="form-control" id="thirteenthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="fourteenthStepRow">
+                                <div class="col-1"><label for="fourteenthStep" id="fourteenthStepLabel">14.</label></div>
+                                <div class="col"><textarea class="form-control" id="fourteenthStep" rows="3"></textarea></div>
+                            </div>
+                            <div class="row mb-4" id="fifteenthStepRow">
+                                <div class="col-1"><label for="fifteenthStep" id="fifteenthStepLabel">15.</label></div>
+                                <div class="col"><textarea class="form-control" id="fifteenthStep" rows="3"></textarea></div>
+                            </div>
+                        </form>
+                    </div>
+                
+                </div>
+            <div class="mb-5">
+                <button type="button" style="float: right;" class="btn btn-primary" onclick="submitRecipe()">Opslaan</button> 
+            </div>
+            
+        </div>
+    </main>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
+    <script src="scripts/General/prechecksUser.js"></script>
+    <script src="scripts/General/showLoggedInUser.js"></script>
+    <script src="scripts/WijzigRecept/getFormInformation.js"></script>
+    <script src="scripts/WijzigRecept/displayOnChange.js"></script>
+</body>
+
+</html>

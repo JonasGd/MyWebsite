@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="shortcut icon" type="image/x-icon" href = "resources/Logo.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login">
+        <h2>Log in</h2>
+        <form action="javascript:" onsubmit="loginUser(this)" method="post">
+            
+                <label for="usernameLogin"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                  </svg></label>
+                <input type="text" name="username" placeholder="Gebruikersnaam" id="usernameLogin" class="form-control" required>
+                <span class="invalid-feedback" id="invalidUsername"></span>
+            
+                <label for="passwordLogin"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"/>
+                  </svg> </label>
+                <input type="password" name="password" id="passwordLogin" placeholder="Wachtwoord" class="form-control" value="">
+                <span class="invalid-feedback" id="invalidPassword"></span>
+                <p>Nog geen account? <a href="Signup">Meld je aan.</a></p>
+            
+                <input type="submit" class="btn btn-primary loginButton" value="Log in">
+            
+        </form>
+    </div>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts/General/login.js"></script>    
+</body>
+</html>

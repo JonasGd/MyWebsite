@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ons Receptenboekje</title>
+    <link rel="shortcut icon" type="image/x-icon" href = "resources/Logo.png"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/receptenKies.css">
+</head>
+
+<body>
+    <div class="container-fluid header" style="width: 100%">
+        <div class="container header">
+            <header class="flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a href="ReceptenKiesCategorie" class="navbar-brand d-flex align-items-center mb-3 mb-md-0 me-0 me-md-auto text-dark text-decoration-none header">
+                            <img src="resources/Logo.png" class="bi me-2 header" width="60" height="48"></img>
+                            <span class="fs-4 header">Ons Receptenboekje</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mt-1 ms-5 header" style="width: 100%">
+                                <li class="nav-item header"><a href="ReceptenOverzicht?foodCategoryId=0" class="nav-link active header" aria-current="page">Recepten</a></li>
+                                <li class="nav-item header"><a href="#" class="nav-link header">Boodschappenlijstje</a></li>
+                                <li class="nav-item header mt-2 ms-lg-auto" id="loginDropdown"><div id="loginLogout"></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <main class="main-content container-fluid" role="main">
+        <div class="container">
+            <div class="row mb-5 mb-md-2">
+                <div class= "col-9-md">
+                    <h1 id="recipeName" class="mb-md-5" style="font-weight:bolder"></h1>
+                </div>
+                <div class="col-3-md" style="text-align: right;" id="changeRecipeDiv">
+                    <a href="#" id="changeRecipeLink" style="font-weight:bold">Wijzig Recept</a>
+                </div>
+            </div> 
+            <div class="row d-md-none mb-4">
+                <div class="col-3" id="CategorySm"></div>
+                <div class="col-3" id="SubCategorySm"></div>
+                <div class="col-3" id="ComfortSm"></div>
+                <div class="col-3" id="FavouriteSm"></div>
+            </div>
+            <div class="row bold">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <span>PREP </span>
+                    <span id="preparationMinutes"></span>
+                    <span> MIN</span>
+                    <span id="cookingTimeStart">| KOOKTIJD </span>
+                    <span id="cookingMinutes"></span>
+                    <span id="cookingTimeEnd"> MIN</span>
+                </div>
+                <div class="col-2 d-none d-md-block" id="ComfortFavourite"></div>
+                <div class="col-md-4 mb-5 mb-md-0" style="text-align: right;">
+                    <div class="row">
+                        <div class="col-8"><span>Aantal personen: </span></div>
+                        <div class="col-4"><span id="peopleFed"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5 d-none d-md-block" id="category"></div>
+            <div class="row">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="mb-5">INGREDIËNTEN</div>
+                    <div class="mb-5" id="ingredients"></div>
+                    <div class="d-none d-md-block" id="picture" style="width:66%;"></div>
+                </div>
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="mb-5">BEREIDING</div>
+                    <div id="steps"></div>
+                </div>
+                <div class="d-md-none" id="pictureSm"></div>
+            </div>
+    </main>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts/General/prechecksUser.js"></script>
+    <script src="scripts/General/showLoggedInUser.js"></script>
+    <script src="scripts/ToonRecept/getRecipeInformationFromDB.js"></script>
+</body>
+
+</html>

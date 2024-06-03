@@ -1,0 +1,144 @@
+.picture  {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: 29% 0;
+}
+
+.picturesmall {
+    width: 100%;
+    height: 96px;
+    object-fit: cover;
+    object-position: 0 30%;
+}   
+
+.picture2  {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: 29% 0;
+}
+
+.picturesmall2 {
+    width: 100%;
+    height: 46px;
+    object-fit: cover;
+    object-position: 0 30%;
+}   
+
+@media (min-width: 992px) {
+    .container1{
+        width: 15.924%;
+        transition: width 1s;
+    }
+
+    .container1:hover {
+        width: 30%;
+    }
+
+    .container1:hover .text-overlay {
+        opacity: 1;
+        text-decoration-line: none;
+        font-weight: bold;
+    }
+
+    .maincontainer:hover .container1:not(:hover) {
+        width: 13%;
+    }
+
+    .image-with-text > .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        transition: 1s ease;
+        opacity: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.998px) {
+    .container1{
+        width: 15.65%;
+        transition: width 1s; 
+    }
+    .container1:hover {
+        width: 29%;
+    }
+
+    .container1:hover .text-overlay {
+        opacity: 1;
+        text-decoration-line: none;
+    }
+
+    .maincontainer:hover .container1:not(:hover) {
+        width: 13%;
+    }
+
+    .image-with-text > .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        transition: 1s ease;
+        opacity: 0;
+    }
+}
+
+@media (max-width:767.998px) {
+    .container1{
+        width: 30.5%;
+        transition: width 1s; 
+    }
+    .container1:hover {
+        width: 39%;
+    }
+
+    .maincontainer:hover .container1:not(:hover) {
+        width: 26.4%;
+    }
+    .container1:hover .text-overlay {
+        text-decoration-line: none;
+    }
+
+    .container2:hover .text-overlay {
+        text-decoration-line: none;
+    }
+
+    .container2{
+        width: 30.5%;
+        transition: width 1s; 
+    }
+    .container2:hover {
+        width: 39%;
+    }
+
+    .maincontainer2:hover .container2:not(:hover) {
+        width: 26.4%;
+    }
+
+    .image-with-text > .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        transition: 1s ease;
+        opacity: 0.8;
+    }
+}
+
+.icon-heart:before{
+    content:"\e908";
+}
+
+.image-with-text {
+    position: relative;
+    text-align: center;
+}
+
+
+
+
+
