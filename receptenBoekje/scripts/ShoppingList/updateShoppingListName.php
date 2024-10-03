@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $currentUser = htmlspecialchars($_SESSION["username"]);
     $servername = "localhost";
@@ -27,7 +28,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($getResult->num_rows > 0) {
         while($row = $getResult->fetch_array())
         {
-            $userId = $row;
+            $userId = $row["id"];
         }
     }
 

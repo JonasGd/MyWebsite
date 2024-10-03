@@ -4,37 +4,41 @@ var isUserAdmin = false;
 $(document).ready(function() {
     waitForFlags(_ => (isLoggedIn === 0 || (isLoggedIn !==null && isLoggedIn !== "null")))
     .then(_ => {
-        if (isLoggedIn==='0') 
+        if (isLoggedIn==='0' && isShopping) 
             window.location = document.referrer;
     })
 
-    waitForFlags(_ => (isAdmin === 0 || (isAdmin !==null && isAdmin !== "null")))
+
+    $('#title').append(isShopping? 'Mijn Boodschappenlijstjes' : 'Mijn weekkeuzes');
+    if(isShopping) document.getElementById('backToChoices').style.display = 'none';
+    
+    waitForFlags(_ => (isAdmin === 0 || (isAdmin !==null && isAdmin !== "null")) && (username === '' || (username !== null && username !== "null")))
     .then(_ => {
         if (isAdmin==='1') 
             isUserAdmin = true;
         else 
             isUserAdmin = false;
+
+        if (!isShopping) document.getElementById('newAndChoices').style.display = 'none';
+        else {
+            $.ajax({
+                url:"scripts/ShoppingList/isRelatedToAdmin.php",
+                type: "get",
+                dataType: "text",
+                success: function(res) {
+                    if (res !== '1' && !isUserAdmin) {
+                        document.getElementById('flexSwitch').style.display = 'none';
+                    }
+                },
+                error: function(req, err) {
+                    console.log(err);
+                }
+            })
+        }
+
+        reloadLists();
     })
 
-    $('#title').append(isShopping? 'Mijn Boodschappenlijstjes' : 'Mijn weekkeuzes');
-    if (!isShopping) document.getElementById('newAndChoices').style.display = 'none';
-    else {
-        $.ajax({
-            url:"scripts/ShoppingList/isRelatedToAdmin.php",
-            type: "get",
-            dataType: "text",
-            success: function(res) {
-                if (res !== '1') {
-                    document.getElementById('newAndChoices').style.display = 'none';
-                }
-            },
-            error: function(req, err) {
-                console.log(err);
-            }
-        })
-    }
-
-    reloadLists();
 })
 
 var lists = [];
@@ -68,9 +72,9 @@ function reloadLists() {
                                 content += res[i]['Id'];
                                 content += ')">';
                                 content += res[i]['Name'];
-                                content += '</h5></div> <div class="col-2"><a style="pointer-events: auto;" class="ingredientLink" onclick="event.cancelBubble = true; event.stopPropagation();deleteShoppingList(';
-                                content += res[i]['Id'];
-                                content += ')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg></a></div></div>'
+                                content += '</h5></div>';
+                                content += ((res[i]['username'] === username) || isUserAdmin) ? ('<div class="col-2"><a style="pointer-events: auto;" class="ingredientLink" onclick="event.cancelBubble = true; event.stopPropagation();deleteShoppingList(' + res[i]['Id'] + ')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg></a></div>') : '';
+                                content += '</div>'
                                 content += '<h6 class="fst-italic">';
                                 content += res[i]['Date'];
                                 content += '</h6>';
@@ -258,7 +262,7 @@ function removeRecipe(recipeId, shoppinglistId) {
     $.ajax({
         url:"scripts/ShoppingList/deleteRecipeFromShoppingListRecipeById.php",
         type: "get",
-        dataType: "json",
+        dataType: "text",
         data: {
             shoppinglistId: shoppinglistId,
             recipeId: recipeId

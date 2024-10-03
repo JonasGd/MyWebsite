@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $currentUser =  htmlspecialchars($_SESSION["username"]);
 
@@ -29,11 +29,11 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     ON
         u.id = s.UserId
     WHERE 
-        s.UserId IN (SELECT c.ConnectedUser FROM userConnections c INNER JOIN users u ON c.ActiveUser = u.id WHERE u.username = '$currentUser')
+        s.UserId IN (SELECT c.ConnectedUser FROM userConnections c INNER JOIN users uu ON c.ActiveUser = uu.id WHERE uu.username = '$currentUser')
     OR 
-        s.UserId = '$currentUser'
+        u.username = '$currentUser'
     OR 
-        '1' IN (SELECT p.permissionsId FROM userPermissions p INNER JOIN users ON p.userId = u.id WHERE u.username = '$currentUser')
+        '1' IN (SELECT p.permissionsId FROM userPermissions p INNER JOIN users uu ON p.userId = uu.id WHERE uu.username = '$currentUser')
     ORDER BY s.Date DESC, s.Name ASC;
     ";
 
@@ -55,5 +55,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     echo ']';
     //echo json_encode($temparray);
 
-} 
+} else {
+    echo $_SESSION["loggedin"];
+    echo '[]';
+}
 ?>

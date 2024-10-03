@@ -45,13 +45,18 @@
 
         <div class="container">
             <div class="row mb-4">
-                <h1 id="title" style="font-weight:bolder"></h1>
+                <div class="col-10">
+                    <h1 id="title" style="font-weight:bolder"></h1>
+                </div>
+                <div class="col-2 text-end" style="margin-top:auto;" id="backToChoices">
+                    <a href="javascript:history.back()">Terug</a>
+                </div>
             </div>
             <div class="row mb-2" id="newAndChoices">
                 <div class="col-9 mb-3">
                     <a onclick="createNewList()" href="#">Nieuw Boodschappenlijstje</a>
                 </div>
-                <div class="col-auto form-check form-switch text-end">
+                <div class="col-auto form-check form-switch text-end" id="flexSwitch">
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchShowAll" onclick="reloadState()">
                     <label class="form-check-label" for="flexSwitchShowAll">Toon ook weekkeuzes</label>
                 </div>

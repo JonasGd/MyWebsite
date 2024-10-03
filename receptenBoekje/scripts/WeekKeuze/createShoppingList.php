@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $currentUser = htmlspecialchars($_SESSION["username"]);
 
@@ -29,7 +29,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($getResult->num_rows > 0) {
         while($row = $getResult->fetch_array())
         {
-            $userId = $row;
+            $userId = $row["id"];
         }
     }
 
@@ -63,11 +63,14 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
             s.Id,
             s.Name,
             s.Date,
+            s.UserId,
             s.isShopping
         FROM 
             `Shoppinglist` s
         WHERE
-            s.Name = '$shoppinglistName';
+            s.Name = '$shoppinglistName' 
+        AND
+            s.UserId = $userId;
         ";
         $getResult = mysqli_query($conn, $getQuery) or die(mysqli_error($conn));
         if($getResult->num_rows > 0) {

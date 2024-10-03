@@ -15,7 +15,7 @@ $recipeId = $_GET['recipeId'];
 
 $query = "
 DELETE FROM `Recipe`
-AND Id = $recipeId;
+WHERE Id = $recipeId;
 ";
 mysqli_set_charset($conn, "utf8" );
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));

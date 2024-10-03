@@ -31,7 +31,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     INNER JOIN
         `userPermissions` up
         ON
-        uc.ConnectedUser = p.userId
+        uc.ConnectedUser = up.userId
     WHERE
         u.username = '$user'
         AND
@@ -46,6 +46,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $prefix = '';
     if($result->num_rows > 0) {
         echo '1';
+    } else {
+        echo '0';
     }
 
 } else {

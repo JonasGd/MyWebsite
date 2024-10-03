@@ -9,6 +9,7 @@ $_SESSION = array();
 session_destroy();
 
 //return
-header('Location: ' . $_SERVER["HTTP_REFERER"] );
+//header('Location: ' . $_SERVER["HTTP_REFERER"] );
+header('Location: https://receptenboekje.jonasgedeshi.be/ReceptenKiesCategorie');
 exit;
 ?>

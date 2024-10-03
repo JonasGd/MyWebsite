@@ -91,7 +91,7 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 3 ? 'icon-drink' :
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
                             : ''): '') + '" style="font-size: 32px;"></span></td>') + 
-                    '<td><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></td></tr>';
+                    '<td' + (isToDelete ? '' : ' style="display:none;"') +'><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></td></tr>';
                 $('#getRecipesFromDB').append(insert);
 
                 var insertSmall = '<tr class="table-row"><td><div class="row mb-4 mt-3"><div class="col-6"><a style="font-weight:bold;" href="./ToonRecept?RecipeId='+res[i]['Id'] + '">' + res[i]['Name'] + '</a></div>'
@@ -133,7 +133,7 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
                             : '') : '') + '" style="font-size: 32px;"></span></div>') + '</div></div>'
                     +'<div class="col-'+(isToDelete? '6' : '3')+'">' + totalTime + '</div>'
-                    + isToDelete? ('<div class="col-3"><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></div>') : '';
+                    + isToDelete? ('<div class="col-3"' + (isToDelete ? '' : ' style="display:none;"') +'><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></div>') : '';
                 $('#getRecipesFromDB-sm').append(insertSmall);
             }
             
@@ -507,12 +507,10 @@ function onCategoryFilter(category) {
 
 function removeRecipes() {
     if (isToDelete) {
-        document.getElementById('removeRecipes').style.display = 'none';
         document.getElementById('delete').style.display = 'none';
         isToDelete = false;
         reloadTable();
     } else {
-        document.getElementById('removeRecipes').style.display = 'block';
         document.getElementById('delete').style.display = 'block';
         isToDelete = true;
         reloadTable();
@@ -524,7 +522,7 @@ function removeRecipe(recipeId) {
         $.ajax({
             url:"scripts/ReceptenOverzicht/deleteRecipeById.php",
             type: "get",
-            dataType: "json",
+            dataType: "text",
             data: {
                 recipeId: recipeId
             },

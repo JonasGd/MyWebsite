@@ -229,6 +229,9 @@ function loadShoppinglists() {
             select += '<svg style="margin-left: -20px" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>';
             select += '</svg></a></div></div>';
             $('#shoppinglistSelectDiv').append(select);
+        },
+        error: function(req, err) {
+            console.log(err);
         }
     })
 }
@@ -239,7 +242,7 @@ function showLists() {
     if (!isAddingToList) {
         isAddingToList = true;
         document.getElementById('shoppinglistLink').style.display = 'none';
-        document.getElementById('shoppinglistSelectDiv').style.display = 'block';
+        document.getElementById('shoppinglistSelectDiv').style.display = 'flex';
 
     } else {
         isAddingToList = false;
@@ -250,7 +253,7 @@ function showLists() {
 
 function addToShoppinglist() {
     var shoppinglistOptions = document.getElementById('shoppinglistSelect').options;
-    var shoppinglistId = shoppinglistOptions.value;
+    var shoppinglistId = shoppinglistOptions[shoppinglistOptions.selectedIndex].value;
 
     if (shoppinglistId == '0') {
         const today = new Date();
