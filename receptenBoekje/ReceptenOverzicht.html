@@ -28,7 +28,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mt-1 ms-5 header" style="width: 100%">
                                 <li class="nav-item header"><a href="ReceptenOverzicht?foodCategoryId=0" class="nav-link active header" aria-current="page">Recepten</a></li>
-                                <li class="nav-item header"><a href="#" class="nav-link header">Boodschappenlijstje</a></li>
+                                <li class="nav-item header"><a href="ShoppingListChoice" class="nav-link header">Boodschappenlijstje</a></li>
                                 <li class="nav-item header mt-2 ms-lg-auto" id="loginDropdown"><div id="loginLogout"></div></li>
                             </ul>
                         </div>
@@ -75,6 +75,12 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-md-4 col-lg-6" style="text-align:right;">
+                    <div id="removeRecipes" style="display: none;">
+                        <a href="#" onclick="removeRecipes()" style="font-weight: bold;">Verwijder een recept</a>
+                    </div>
+
+                </div>
             </div>
             <div class="collapse" id="collapseFilters">
                 <div class="card card-body">
@@ -113,9 +119,10 @@
                             <th class="sortable" sort="FoodCategoryId" scope="col" id="category" style="white-space: pre;">Categorie <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="background-color: rgba(0,0,0,0);" fill="currentColor" class="bi bi-chevron-expand d-none d-lg-inline-block" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708m0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708"/>
                             </svg></th>
-                            <th class="sortable" sort="SubCategoryId" scope="col" id="subCategory" style="white-space: pre;">Subcategorie <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="background-color: rgba(0,0,0,0);" fill="currentColor" class="bi bi-chevron-expand d-none d-lg-inline-block" viewBox="0 0 16 16">
+                            <th class="sortable" sort="SubCategoryId" scope="col" id="subCategory" style="white-space: pre; border-top-right-radius: 5px;">Subcategorie <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="background-color: rgba(0,0,0,0);" fill="currentColor" class="bi bi-chevron-expand d-none d-lg-inline-block" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708m0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708"/>
                             </svg></th>
+                            <th scope="col" id="delete" style="white-space: pre; display: none;"></th>
                         </tr>
                     </thead>
                     <tbody id='getRecipesFromDB'>

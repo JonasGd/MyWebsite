@@ -1,0 +1,12 @@
+.links{
+    width: 85%;
+    transition: width 1s;
+}
+
+.links:hover{
+    width:95%;
+}
+
+a {
+    text-align: center;
+}

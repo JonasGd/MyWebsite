@@ -1,13 +1,17 @@
 var isAdmin;
 var isCreate;
 var isDelete;
+var isUpdate;
+var isLoggedIn;
 
 $(document).ready(function() {
     isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
     isCreate = JSON.parse(sessionStorage.getItem('isCreate'));
     isDelete = JSON.parse(sessionStorage.getItem('isDelete'));
+    isUpdate = JSON.parse(sessionStorage.getItem('isUpdate'));
+    isLoggedIn = JSON.parse(sessionStorage.getItem('isLoggedIn'));
 
-    if (!isAdmin || isAdmin === "null" || !isCreate || isCreate === "null" || !isDelete || isDelete === "null" ) {
+    if (!isAdmin || isAdmin === "null" || !isCreate || isCreate === "null" || !isDelete || isDelete === "null" || !isUpdate || isUpdate === "null" || !isLoggedIn || isLoggedIn === "null") {
         loadParams();
     }
 });
@@ -46,9 +50,34 @@ function loadParams(){
             }
         }
     });
+    $.ajax({
+        url:"scripts/General/isUserUpdate.php",
+        type: "get",
+        success: function(res) {
+            if (res === '1') {
+                isUpdate = '1';
+            } else {
+                isUpdate = '0';
+            }
+        }
+    });
+
+    $.ajax({
+        url:"scripts/General/isUserLoggedIn.php",
+        type: "get",
+        success: function(res) {
+            if (res === '') {
+                isLoggedIn = '0';
+            } else {
+                isLoggedIn = '1';
+            }
+        }
+    });
     sessionStorage.setItem('isAdmin', JSON.stringify(isAdmin));
     sessionStorage.setItem('isCreate', JSON.stringify(isCreate));
     sessionStorage.setItem('isDelete', JSON.stringify(isDelete));
+    sessionStorage.setItem('isUpdate', JSON.stringify(isUpdate));
+    sessionStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
 }
 
 

@@ -10,6 +10,13 @@ $(document).ready(function() {
             else 
                 document.getElementById('newRecipe').style.display = 'block';
         })
+    waitForFlags(_ => (isAdmin === 0 || (isAdmin !==null && isAdmin !== "null")) && (isDelete === 0 || (isDelete !== null && isDelete !== "null")))
+        .then(_ => {
+            if (isAdmin==='0' && isDelete==='0') 
+                document.getElementById('removeRecipes').style.display = 'none';
+            else 
+                document.getElementById('removeRecipes').style.display = 'block';
+        })
     reloadTable();
     loadCategories();
 });
@@ -20,6 +27,8 @@ var foodCategoryId = getQueryVariable("foodCategoryId");
 var searchKeyWord = '';
 var tableSort = 'Name';
 var order = 'ASC';
+
+var isToDelete = false;
 
 function reloadTable() {
     $.ajax({
@@ -81,7 +90,8 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 2 ? 'icon-appetizer1' :
                             res[i]['SubCategoryId'] == 3 ? 'icon-drink' :
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
-                            : ''): '') + '" style="font-size: 32px;"></span></td>') + '</tr>';
+                            : ''): '') + '" style="font-size: 32px;"></span></td>') + 
+                    '<td><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></td></tr>';
                 $('#getRecipesFromDB').append(insert);
 
                 var insertSmall = '<tr class="table-row"><td><div class="row mb-4 mt-3"><div class="col-6"><a style="font-weight:bold;" href="./ToonRecept?RecipeId='+res[i]['Id'] + '">' + res[i]['Name'] + '</a></div>'
@@ -122,7 +132,8 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 3 ? 'icon-drink' :
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
                             : '') : '') + '" style="font-size: 32px;"></span></div>') + '</div></div>'
-                    +'<div class="col-6">' + totalTime + '</div>';
+                    +'<div class="col-'+(isToDelete? '6' : '3')+'">' + totalTime + '</div>'
+                    + isToDelete? ('<div class="col-3"><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></div>') : '';
                 $('#getRecipesFromDB-sm').append(insertSmall);
             }
             
@@ -492,6 +503,39 @@ function onCategoryFilter(category) {
         if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     reloadCategories();
+}
+
+function removeRecipes() {
+    if (isToDelete) {
+        document.getElementById('removeRecipes').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+        isToDelete = false;
+        reloadTable();
+    } else {
+        document.getElementById('removeRecipes').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+        isToDelete = true;
+        reloadTable();
+    }
+}
+
+function removeRecipe(recipeId) {
+    if (confirm("Ben je zeker dat je dit recept wilt verwijderen?")) {
+        $.ajax({
+            url:"scripts/ReceptenOverzicht/deleteRecipeById.php",
+            type: "get",
+            dataType: "json",
+            data: {
+                recipeId: recipeId
+            },
+            success: function(res) {
+                reloadTable();
+            },
+            error: function(req, err) {
+                console.log(err);
+            }
+        })
+    }
 }
 
 

@@ -67,7 +67,7 @@
     url('../resources/Reforma/Reforma2018-NegraItalica.woff') format('woff'),
     url('../resources/Reforma/Reforma2018-NegraItalica.woff2') format('woff2');
     font-style: italic;
-    font-weight: bolder;
+    font-weight: 800;
 }
 .reforma {
     font-family: Reforma;
@@ -508,4 +508,15 @@ span {
     text-align: inherit;
     width: 100%;
     white-space: nowrap;
+}
+
+@media (min-width: 444px) {
+    .col-xs-7 {
+        flex: 0 0 auto;
+        width: 58.33333333%;
+    }
+}
+
+h6{
+    background-color: rgba(0,0,0,0);
 }

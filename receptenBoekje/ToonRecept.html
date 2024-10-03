@@ -29,7 +29,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mt-1 ms-5 header" style="width: 100%">
                                 <li class="nav-item header"><a href="ReceptenOverzicht?foodCategoryId=0" class="nav-link active header" aria-current="page">Recepten</a></li>
-                                <li class="nav-item header"><a href="#" class="nav-link header">Boodschappenlijstje</a></li>
+                                <li class="nav-item header"><a href="ShoppingListChoice" class="nav-link header">Boodschappenlijstje</a></li>
                                 <li class="nav-item header mt-2 ms-lg-auto" id="loginDropdown"><div id="loginLogout"></div></li>
                             </ul>
                         </div>
@@ -42,11 +42,17 @@
     <main class="main-content container-fluid" role="main">
         <div class="container">
             <div class="row mb-5 mb-md-2">
-                <div class= "col-9-md">
+                <div class= "col-md-8">
                     <h1 id="recipeName" class="mb-md-5" style="font-weight:bolder"></h1>
                 </div>
-                <div class="col-3-md" style="text-align: right;" id="changeRecipeDiv">
-                    <a href="#" id="changeRecipeLink" style="font-weight:bold">Wijzig Recept</a>
+                <div class="col-md-4 mt-2" style="text-align: right;" id="changeRecipeDivs">
+                    <div id = "changeRecipeDiv">
+                        <a href="#" id="changeRecipeLink" style="font-weight:bold">Wijzig Recept</a>
+                    </div>
+                    <div id="shoppinglistDiv">
+                        <a href="#" id="shoppinglistLink" onclick="showLists()">Voeg toe aan boodschappenlijst</a>
+                        <div class="row" id="shoppinglistSelectDiv" style="display:none">
+                    </div>
                 </div>
             </div> 
             <div class="row d-md-none mb-4">

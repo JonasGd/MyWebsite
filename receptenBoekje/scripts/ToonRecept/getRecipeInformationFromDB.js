@@ -1,16 +1,25 @@
 var peopleFed;
+var peopleFedId;
 
 $(document).ready(function() {
     changeRecipeLink();
     loadRecipe();
     loadRecipeList();
 
-    waitForFlags(_ => (isAdmin === 0 || (isAdmin !==null && isAdmin !== "null")) && (isCreate === 0 || (isCreate !== null && isAdmin !== "null")))
+    waitForFlags(_ => (isAdmin === 0 || (isAdmin !==null && isAdmin !== "null")) && (isCreate === 0 || (isCreate !== null && isAdmin !== "null")) && (isLoggedIn === 0 || (isLoggedIn != null && isLoggedIn !== "null")))
     .then(_ => {
         if (isAdmin==='0' && isCreate==='0') 
             document.getElementById('changeRecipeDiv').style.display = 'none';
         else 
             document.getElementById('changeRecipeDiv').style.display = 'block';
+
+
+        if (isLoggedIn === '0')
+            document.getElementById('shoppinglistDiv').style.display = 'none';
+        else {
+            document.getElementById('shoppinglistDiv').style.display = 'block';
+            loadShoppinglists();
+        }
     })
 })
 
@@ -122,6 +131,7 @@ function loadRecipe() {
 
 
             peopleFed = res['PeopleFed'];
+            peopleFedId = res['PeopleFedId'];
             var picture = '<div class="img-container">';
             picture += '<img class="picture" src="' + (res['PictureURL']!=null ? res['PictureURL'] : 
                 res['FoodCategoryId'] == 3 ?  (
@@ -173,17 +183,18 @@ function loadPeopleFeds() {
         dataType: "json",
         success: function(res) {
             var select = '';
-            select='<select class="form-select" aria-label="People Fed">';
+            select='<select class="form-select form-select-people" aria-label="People Fed">';
             for (let i = 0; i < res.length; i++) {
-                select += '<option' + (res[i]['Label']==peopleFed?' selected':'') + '>'+res[i]['Label']+'</option>';
+                select += '<option id="pf-' + res[i]['Id'] +'" ' + (res[i]['Label']==peopleFed?' selected':'') + '>'+res[i]['Label']+'</option>';
             }
             select+='</select>';
             $('#peopleFed').append(select);
-            const options = document.querySelectorAll('.form-select');
+            const options = document.querySelectorAll('.form-select-people');
 
             for (const option of options) {
             option.addEventListener('change', function handleChange() {
                 peopleFed = option.value;
+                peopleFedId = option.id.slice(3,option.id.length);
                 reloadRecipeIngredients(peopleFed);
             });
             }
@@ -192,6 +203,136 @@ function loadPeopleFeds() {
             console.log(err);
         }
     })
+}
+
+var lists = [];
+
+function loadShoppinglists() {
+    $.ajax({
+        url:"scripts/ShoppingList/getAllShoppingLists.php",
+        type:"get",
+        dataType: "json",
+        success: function(res) {
+            lists = res;
+            var select = '';
+            select += '<div class="col-1"><a href="#" onclick="showLists()">'
+            select +='<svg style="margin-top: 8px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/><path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg>';
+            select += '</a></div>';
+            select += '<div class="col-md-9 col-lg-10 col-10">';
+            select += '<select class="form-select" aria-label="ShoppingLists" id=shoppinglistSelect><option value="0" selected>(Nieuwe Lijst)</option>';
+            for (let i = 0; i < res.length; i++) {
+                if (res[i]['isShopping'] !== '0')
+                    select += '<option value="' + res[i]['Id'] + '">' + res[i]['Name']+'</option>';
+            }
+            select += '</select></div>';
+            select += '<div class="col-1"><a href="#" onclick="addToShoppinglist()">';
+            select += '<svg style="margin-left: -20px" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>';
+            select += '</svg></a></div></div>';
+            $('#shoppinglistSelectDiv').append(select);
+        }
+    })
+}
+
+var isAddingToList = false;
+
+function showLists() {
+    if (!isAddingToList) {
+        isAddingToList = true;
+        document.getElementById('shoppinglistLink').style.display = 'none';
+        document.getElementById('shoppinglistSelectDiv').style.display = 'block';
+
+    } else {
+        isAddingToList = false;
+        document.getElementById('shoppinglistLink').style.display = 'block';
+        document.getElementById('shoppinglistSelectDiv').style.display = 'none';
+    }
+}
+
+function addToShoppinglist() {
+    var shoppinglistOptions = document.getElementById('shoppinglistSelect').options;
+    var shoppinglistId = shoppinglistOptions.value;
+
+    if (shoppinglistId == '0') {
+        const today = new Date();
+        var newListName = (today.getFullYear() + "-"+(today.getMonth()+1) + "-" + today.getDate()).toString();
+        var newListDate = (today.getFullYear() + ("0" + (today.getMonth()+1)).slice(-2) + ("0" + (today.getDate())).slice(-2)).toString();
+
+        newListName = uniqueName(newListName, 0);
+
+        var shoppinglist = {
+            name: newListName,
+            date: newListDate,
+            isShopping: true
+        } 
+        $.ajax({
+            url:"scripts/WeekKeuze/createShoppingList.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                json: JSON.stringify(shoppinglist)
+            },
+            success: function(res) {
+                createShoppingListRecipe(res['Id']);
+            },
+            error: function(req, err) {
+                console.log(err);
+            }
+        })   
+    } else {
+        createShoppingListRecipe(shoppinglistId)
+    }   
+}
+
+function createShoppingListRecipe(shoppinglistId) {
+    $.ajax({
+        url:"scripts/WeekKeuze/getShoppingListRecipesByShoppingListId.php",
+        type: "get",
+        dataType: "json",
+        data: {
+            shoppinglistId: shoppinglistId
+        },
+        success: function(res) {
+            if (!res.some(sr => sr['RecipeId'] === recipeId)) {
+                var shoppinglistRecipe =  {
+                    shoppinglistId: shoppinglistId,
+                    recipeId: recipeId,
+                    peopleFedId: peopleFedId
+                }
+                $.ajax({
+                    url:"scripts/WeekKeuze/createShoppingListRecipe.php",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        json: JSON.stringify(shoppinglistRecipe)
+                    },
+                    success: function(res2) {
+                        showLists(); 
+                    },
+                    error: function(req, err) {
+                        console.log(err);
+                    }
+                })
+            } else {
+                //notification: already exists
+            }
+        }
+    });
+}
+
+function uniqueName(name, shoppinglistId) {
+    var localName = name;
+    for (const list of lists) {
+        if (list['Name'] === name && Number(list['Id']) !== shoppinglistId) {
+            newName = (name.charAt(name.length-1) === ')' && (name.charAt(name.length-3) ==='(' || name.charAt(name.length-4) === '(')) ?
+                (name.charAt(name.length-3) ==='(' ? 
+                    (name.slice(0, name.length-2) + (Number(name.charAt(name.length-2))+1) + name.slice(name.length-1, name.length)) :
+                    (name.slice(0, name.length-3) + (Number(name.slice(name.length-3, name.length-1))+1) + name.slice(name.length-1, name.length))
+                ):
+                (name + ' (1)');
+            localName = uniqueName(newName);
+        }
+    }
+    return localName;
 }
 
 function getQueryVariable(variable) {

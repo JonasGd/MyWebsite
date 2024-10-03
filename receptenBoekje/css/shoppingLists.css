@@ -1,0 +1,24 @@
+.disabled {
+    background-color:#f1f3f5;
+}
+
+.disabled:hover {
+    background-color:#f1f3f5 !important;
+}
+
+.disabled > .list-group{
+    --bs-list-group-bg: #f1f3f5;
+}
+
+.card {
+    cursor: pointer;
+}
+
+.link, .link:visited{
+    color: #59abe3;
+    transition: all 180ms linear;
+}
+
+.link:hover, .link:focus {
+    color: #4380aa;
+}

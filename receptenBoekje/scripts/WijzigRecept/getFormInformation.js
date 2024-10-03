@@ -350,6 +350,7 @@ function createIngredient(categoryId) {
         },
         success: function(res) {
             $('#newIngredientModal').modal('hide');
+            document.getElementById('ingredientMainCategoryList').value = '';
             document.getElementById('ingredientCategoryName').value = '';
             var ingredientId = res['Id'];
             var ingredientObject = {
@@ -382,6 +383,7 @@ function createIngredientCategory(mainCategoryId) {
         },
         success: function(res) {
             $('#newIngredientCategoryModal').modal('hide');
+            document.getElementById('ingredientCategoryList').value = '';
             var categoryId = res['Id'];
             createIngredient(categoryId);
             loadIngredientCategories();            
@@ -566,25 +568,39 @@ function addIngredient(ingredientObj) {
 }
 
 function reloadIngredients() {
+    var isMobile = detectMobile();
     $('#ingredients').empty();
     var ingredients='';
-    console.log(ingredientList)
+    console.log(ingredientList);
+    console.log("isMobile: " + isMobile);
     for(const ingredient of ingredientList) {
-        ingredients+='<tr class="table-row table-row-color" id="'+ingredient.id + '" style="border-bottom-width: 1px;"><td><div class="row" style="pointer-events: none; background-color:rgba(0,0,0,0);"><div class="col-2">'+(ingredient.quantity==0?'':ingredient.quantity)+
-        '</div><div class="col-2">'+ingredient.unit+'</div><div class="col-7"><a style="pointer-events: auto;" class="ingredientLink" onclick="changeIngredient(\''+ingredient.id+'\')">'+ingredient.ingredient+'</a></div>'+
-        '<div class="col-1" style="text-align:right;"><a style="pointer-events: auto;" class="ingredientLink" onclick="removeIngredient(\''+ingredient.id+'\')">x</a></div></div></td></tr>';
+        ingredients+='<tr class="table-row table-row-color" id="'+ingredient.id + '" style="border-bottom-width: 1px;"><td><div class="row" style="pointer-events: none; background-color:rgba(0,0,0,0);"><div class="col-4"><div class="row"><div class="col-lg-6 col-auto">'+(ingredient.quantity==0?'':ingredient.quantity)+
+        '</div><div class="col-lg-6 col-auto">'+ingredient.unit+'</div></div></div><div class="col-xs-7 col-6"><a style="pointer-events: auto;" class="ingredientLink" onclick="changeIngredient(\''+ingredient.id+'\')">'+ingredient.ingredient+'</a></div>'+
+        '<div class="col-1" style="text-align:right;"><a style="pointer-events: auto;" class="ingredientLink" onclick="removeIngredient(\''+ingredient.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'+
+        '<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>'+
+        '</svg></a></div></div>'+
+        (isMobile?'<div class="row">' +
+            '<div class="col-6" style="text-align: right;">' + 
+            '<a style="pointer-events: auto;" onclick="moveIngredientDown(\''+ingredient.id+'\')" class="ingredientLink"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">'+
+            '<path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"></path>'+
+            '</svg></a></div><div class="col-6"><a style="pointer-events: auto;" onclick="moveIngredientUp(\''+ingredient.id+'\')" class="ingredientLink"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">'+
+            '<path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"></path>' +
+            '</svg></a></div></div>':'')+        
+        '</td></tr>';
     }
     $('#ingredients').append(ingredients);
-    $("#ingredients").tableDnD({
-        onDrop: function(table, row) {
-            var rows = table.rows;
-            var ingredientTempList = [];
-            for (var row of rows) {
-                ingredientTempList.push(ingredientList.find(ingredient => ingredient.id == row.id));
+    if(!isMobile) {
+        $("#ingredients").tableDnD({
+            onDrop: function(table, row) {
+                var rows = table.rows;
+                var ingredientTempList = [];
+                for (var row of rows) {
+                    ingredientTempList.push(ingredientList.find(ingredient => ingredient.id == row.id));
+                }
+                ingredientList = ingredientTempList;
             }
-            ingredientList = ingredientTempList;
-        }
-    });
+        });
+    }
 }
 
 
@@ -592,6 +608,22 @@ function removeIngredient(id) {
     var indexToRemove = ingredientList.findIndex(ingredient => ingredient.id == id);
     ingredientList.splice(indexToRemove, 1);
     reloadIngredients();
+}
+
+function moveIngredientDown(id) {
+    var indexToMove = ingredientList.findIndex(ingredient => ingredient.id == id);
+    if (indexToMove > 0) {
+        const ingredientToMove = ingredientList.splice(indexToMove, 1);
+        ingredientList.splice((indexToMove - 1), 0, ingredientToMove);
+    }
+}
+
+function moveIngredientUp(id)  {
+    var indexToMove = ingredientList.findIndex(ingredient => ingredient.id == id);
+    if (indexToMove < ingredientList.length - 1) {
+        const ingredientToMove = ingredientList.splice(indexToMove, 1);
+        ingredientList.splice((indexToMove + 1), 0, ingredientToMove);
+    }
 }
 
 function changeIngredient(id) {
@@ -618,4 +650,20 @@ function getQueryVariable(variable) {
         }
     }
     return 0;
+}
+
+function detectMobile() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+    
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
 }

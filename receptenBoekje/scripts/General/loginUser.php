@@ -105,6 +105,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         mysqli_stmt_close($stmt4);
 
+                        $sql5 = "SELECT id FROM userPermissions WHERE userId = ? AND permissionsId = 2";
+
+                        if ($stmt5 = mysqli_prepare($conn, $sql5)){
+                            mysqli_stmt_bind_param($stmt5, 's', $param_userid);
+                            $param_userid = $id;
+                            if(mysqli_stmt_execute($stmt5)) {
+                                mysqli_stmt_store_result($stmt5);
+
+                                if(mysqli_stmt_num_rows($stmt5) > 0) {
+                                    $_SESSION["update"] = true;
+                                } else {
+                                    $_SESSION["update"] = false;
+                                }
+                            } 
+                        }
+
+                        mysqli_stmt_close($stmt5);
+
                         // Redirect user to welcome page
                         echo 1;
                     } else{
