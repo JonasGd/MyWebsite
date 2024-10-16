@@ -183,7 +183,7 @@ function loadPeopleFeds() {
         dataType: "json",
         success: function(res) {
             var select = '';
-            select='<select class="form-select form-select-people" aria-label="People Fed">';
+            select='<select class="form-select form-select-people" aria-label="People Fed" name="peopleFedForm">';
             for (let i = 0; i < res.length; i++) {
                 select += '<option id="pf-' + res[i]['Id'] +'" ' + (res[i]['Label']==peopleFed?' selected':'') + '>'+res[i]['Label']+'</option>';
             }

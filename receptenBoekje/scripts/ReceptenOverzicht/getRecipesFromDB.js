@@ -14,30 +14,43 @@ $(document).ready(function() {
         .then(_ => {
             if (isAdmin==='0' && isDelete==='0') 
                 document.getElementById('removeRecipes').style.display = 'none';
-            else 
+            else {
                 document.getElementById('removeRecipes').style.display = 'block';
+                canDelete = true;
+            }
         })
     reloadTable();
     loadCategories();
 });
 
-var filterList = [];
-var filterListText = '';
+var filterListIds = [];
 var foodCategoryId = getQueryVariable("foodCategoryId");
 var searchKeyWord = '';
 var tableSort = 'Name';
 var order = 'ASC';
 
+var canDelete = false;
 var isToDelete = false;
 
+
 function reloadTable() {
+    var filterListText = "(";
+    if (filterListIds.length > 0) {
+        for (const filterListId of filterListIds ) {
+            filterListText += filterListId + ', '
+        }
+        filterListText = filterListText.slice(0,-2);
+    } else {
+        filterListText += '0';
+    }
+    filterListText += ")";
     $.ajax({
         url:"scripts/ReceptenOverzicht/getRecipes.php",
         type: "get",
         dataType: "json",
         data: {
-            filterListText: filterListText,
-            filterListLength: filterList.length,
+            filterListIds: filterListText,
+            filterListLength: filterListIds.length,
             foodCategoryId: foodCategoryId,
             searchKeyWord: searchKeyWord,
             tableSort: tableSort,
@@ -91,7 +104,7 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 3 ? 'icon-drink' :
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
                             : ''): '') + '" style="font-size: 32px;"></span></td>') + 
-                    '<td' + (isToDelete ? '' : ' style="display:none;"') +'><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></td></tr>';
+                    (canDelete? ('<td' + (isToDelete ? '' : ' style="display:none;"') +'><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></td>'): '')  +'</tr>';
                 $('#getRecipesFromDB').append(insert);
 
                 var insertSmall = '<tr class="table-row"><td><div class="row mb-4 mt-3"><div class="col-6"><a style="font-weight:bold;" href="./ToonRecept?RecipeId='+res[i]['Id'] + '">' + res[i]['Name'] + '</a></div>'
@@ -132,8 +145,8 @@ function reloadTable() {
                             res[i]['SubCategoryId'] == 3 ? 'icon-drink' :
                             res[i]['SubCategoryId'] == 4 ? 'icon-etc'
                             : '') : '') + '" style="font-size: 32px;"></span></div>') + '</div></div>'
-                    +'<div class="col-'+(isToDelete? '6' : '3')+'">' + totalTime + '</div>'
-                    + isToDelete? ('<div class="col-3"' + (isToDelete ? '' : ' style="display:none;"') +'><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></div>') : '';
+                    +'<div class="col-'+(isToDelete? '3' : '6')+'">' + totalTime + '</div>'
+                    + (canDelete && isToDelete? ('<div class="col-3"><a onclick="removeRecipe('+res[i]['Id']+')" href="#">Delete</a></div>') : '');
                 $('#getRecipesFromDB-sm').append(insertSmall);
             }
             
@@ -181,7 +194,7 @@ for (const sortable of sortables) {
             if (allSortables.classList.contains('sorted')) allSortables.classList.remove('sorted');
         }
         sortable.classList.add('sorted');
-        if (tableSort == sortable.getAttribute('sort')) order = 'DESC';
+        if (tableSort == sortable.getAttribute('sort')|| sortable.getAttribute('sort') == 'isFavourite' || sortable.getAttribute('sort') == 'isComfortFood') order = 'DESC';
         else order = 'ASC';
         tableSort = sortable.getAttribute('sort');
     } else {
@@ -255,12 +268,12 @@ function loadCategories() {
             $('#FruitGroenten').empty();
             for (let i = 0; i < res.length; i++) {
                 ingredientCategoriesFG.push(res[i]);
-                $('#FruitGroenten').append('<div class="tag tag-small mb-2 me-2 ingredientFG border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                $('#FruitGroenten').append('<div class="tag tag-small mb-2 me-2 ingredientFG border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
             }
             const ingredients = document.querySelectorAll('.ingredientFG');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -279,12 +292,12 @@ function loadCategories() {
             $('#VleesVis').empty();
             for (let i = 0; i < res.length; i++) {
                 ingredientCategoriesVV.push(res[i]);
-                $('#VleesVis').append('<div class="tag tag-small mb-2 me-2 ingredientVV border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                $('#VleesVis').append('<div class="tag tag-small mb-2 me-2 ingredientVV border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
             }
             const ingredients = document.querySelectorAll('.ingredientVV');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -303,12 +316,12 @@ function loadCategories() {
             $('#KruidenSauzen').empty();
             for (let i = 0; i < res.length; i++) {
                 ingredientCategoriesKS.push(res[i]);
-                $('#KruidenSauzen').append('<div class="tag tag-small mb-2 me-2 ingredientKS border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                $('#KruidenSauzen').append('<div class="tag tag-small mb-2 me-2 ingredientKS border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
             }
             const ingredients = document.querySelectorAll('.ingredientKS');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -327,12 +340,12 @@ function loadCategories() {
             $('#Koolhydraten').empty();
             for (let i = 0; i < res.length; i++) {
                 ingredientCategoriesK.push(res[i]);
-                $('#Koolhydraten').append('<div class="tag tag-small mb-2 me-2 ingredientK border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                $('#Koolhydraten').append('<div class="tag tag-small mb-2 me-2 ingredientK border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
             }
             const ingredients = document.querySelectorAll('.ingredientK');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -351,12 +364,12 @@ function loadCategories() {
             $('#ZuivelEieren').empty();
             for (let i = 0; i < res.length; i++) {
                 ingredientCategoriesZE.push(res[i]);
-                $('#ZuivelEieren').append('<div class="tag tag-small mb-2 me-2 ingredientZE border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                $('#ZuivelEieren').append('<div class="tag tag-small mb-2 me-2 ingredientZE border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
             }
             const ingredients = document.querySelectorAll('.ingredientZE');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -376,13 +389,13 @@ function loadCategories() {
             for (let i = 1; i < res.length; i++) {
                 if (res[i]['Label']!='MoreEggs') {
                     ingredientCategoriesA.push(res[i]);
-                    $('#Andere').append('<div class="tag tag-small mb-2 me-2 ingredientA border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ res[i]['Label'] +'</div>');
+                    $('#Andere').append('<div class="tag tag-small mb-2 me-2 ingredientA border-radius-rounded background-' + (res[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + res[i]['Id'] + '">'+ res[i]['Label'] +'</div>');
                 }
             }
             const ingredients = document.querySelectorAll('.ingredientA');
             for (const ingredient of ingredients) {
                 ingredient.addEventListener('click', function handleClick() {
-                    onCategoryFilter(ingredient.innerText);
+                    onCategoryFilter((ingredient.id).slice(4));
                 });
             }
         },
@@ -395,62 +408,62 @@ function loadCategories() {
 function reloadCategories() {
     $('#FruitGroenten').empty();
     for (let i = 0; i < ingredientCategoriesFG.length; i++) {
-        $('#FruitGroenten').append('<div class="tag tag-small mb-2 me-2 ingredientFG border-radius-rounded background-' + (ingredientCategoriesFG[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesFG[i]['Label'] +'</div>');
+        $('#FruitGroenten').append('<div class="tag tag-small mb-2 me-2 ingredientFG border-radius-rounded background-' + (ingredientCategoriesFG[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesFG[i]['Id'] + '">'+ ingredientCategoriesFG[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientFG');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }
     $('#VleesVis').empty();
     for (let i = 0; i < ingredientCategoriesVV.length; i++) {
-        $('#VleesVis').append('<div class="tag tag-small mb-2 me-2 ingredientVV border-radius-rounded background-' + (ingredientCategoriesVV[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesVV[i]['Label'] +'</div>');
+        $('#VleesVis').append('<div class="tag tag-small mb-2 me-2 ingredientVV border-radius-rounded background-' + (ingredientCategoriesVV[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesVV[i]['Id'] + '">'+ ingredientCategoriesVV[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientVV');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }
     $('#Koolhydraten').empty();
     for (let i = 0; i < ingredientCategoriesK.length; i++) {
-        $('#Koolhydraten').append('<div class="tag tag-small mb-2 me-2 ingredientK border-radius-rounded background-' + (ingredientCategoriesK[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesK[i]['Label'] +'</div>');
+        $('#Koolhydraten').append('<div class="tag tag-small mb-2 me-2 ingredientK border-radius-rounded background-' + (ingredientCategoriesK[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesK[i]['Id'] + '">'+ ingredientCategoriesK[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientK');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }
     $('#ZuivelEieren').empty();
     for (let i = 0; i < ingredientCategoriesZE.length; i++) {
-        $('#ZuivelEieren').append('<div class="tag tag-small mb-2 me-2 ingredientZE border-radius-rounded background-' + (ingredientCategoriesZE[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesZE[i]['Label'] +'</div>');
+        $('#ZuivelEieren').append('<div class="tag tag-small mb-2 me-2 ingredientZE border-radius-rounded background-' + (ingredientCategoriesZE[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesZE[i]['Id'] + '">'+ ingredientCategoriesZE[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientZE');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }
     $('#KruidenSauzen').empty();
     for (let i = 0; i < ingredientCategoriesKS.length; i++) {
-        $('#KruidenSauzen').append('<div class="tag tag-small mb-2 me-2 ingredientKS border-radius-rounded background-' + (ingredientCategoriesKS[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesKS[i]['Label'] +'</div>');
+        $('#KruidenSauzen').append('<div class="tag tag-small mb-2 me-2 ingredientKS border-radius-rounded background-' + (ingredientCategoriesKS[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesKS[i]['Id'] + '">'+ ingredientCategoriesKS[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientKS');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }
     $('#Andere').empty();
     for (let i = 0; i < ingredientCategoriesA.length; i++) {
-        $('#Andere').append('<div class="tag tag-small mb-2 me-2 ingredientA border-radius-rounded background-' + (ingredientCategoriesA[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn">'+ ingredientCategoriesA[i]['Label'] +'</div>');
+        $('#Andere').append('<div class="tag tag-small mb-2 me-2 ingredientA border-radius-rounded background-' + (ingredientCategoriesA[i]['Is_Selected']!='0'? 'primary':'neutral') +' btn" id="tag-' + ingredientCategoriesA[i]['Id'] + '">'+ ingredientCategoriesA[i]['Label'] +'</div>');
     }
     ingredients = document.querySelectorAll('.ingredientA');
     for (const ingredient of ingredients) {
         ingredient.addEventListener('click', function handleClick() {
-            onCategoryFilter(ingredient.innerText);
+            onCategoryFilter((ingredient.id).slice(4));
         });
     }                                                                                                                    
 }
@@ -464,43 +477,38 @@ function resetCategories() {
     ingredientCategoriesVV = [];
     ingredientCategoriesZE = [];
     loadCategories();
-    filterList=[];
-    filterListText='';
+    filterListIds=[];
     reloadTable();
 }
 
-function onCategoryFilter(category) {
-    if (filterListText.toLowerCase().indexOf(category.replace(' ', "").toLowerCase()) > -1) {
+function onCategoryFilter(categoryId) {
+    if (filterListIds.includes(categoryId)) {
         var rowNumber;
-        filterList.forEach(function(filterItem, index) {
-            if (filterItem==category) rowNumber = index;
+        filterListIds.forEach(function(filterItem, index) {
+            if (filterItem==categoryId) rowNumber = index;
         })
-        filterList.splice(rowNumber, 1);
+        filterListIds.splice(rowNumber, 1);
     } else {
-        filterList.push(category)
+        filterListIds.push(categoryId)
     }
-    filterListText = "";
-    filterList.forEach(function(filterItem) {
-        filterListText += filterItem.replace(" ", "");
-    });
     reloadTable();
     ingredientCategoriesA.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     ingredientCategoriesFG.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']= categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']= categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     ingredientCategoriesK.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     ingredientCategoriesKS.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     ingredientCategoriesVV.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     ingredientCategoriesZE.forEach(function(categoryItem) {
-        if(categoryItem['Label'] == category) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
+        if(categoryItem['Id'] == categoryId) categoryItem['Is_Selected']=categoryItem['Is_Selected']=='0' ? '1' : '0';
     });
     reloadCategories();
 }

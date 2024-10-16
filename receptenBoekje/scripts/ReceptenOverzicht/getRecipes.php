@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn-> connect_error);
 }
 
-$filterListText = $_GET['filterListText'];
+$filterListIds = $_GET['filterListIds'];
 $filterListLength = $_GET['filterListLength'];
 $foodCategoryId = $_GET['foodCategoryId'];
 $searchKeyWord = $_GET['searchKeyWord'];
@@ -50,51 +50,17 @@ END
 (
     IFNULL(r.PreparationMinutes, 0) + IFNULL(r.CookingMinutes, 0)
 ) TotalTime,
-COUNT(
-    CASE WHEN('$filterListText' = N'') THEN 1 ELSE(
-        #FilterListText
-        CASE WHEN(
-            (
-                (
-                    LOCATE(
-                        (
-                    REPLACE
-                        (ic.Label, N' ', N'')
-                    ),
-                    '$filterListText'
-                    ) -1
-                )
-            ) >(-1)
-        ) THEN 1 ELSE 0
-    END
-)
-END
-) IngredientsFilterCount,
-(
-    CASE WHEN('$filterListText' = N'') THEN 1 ELSE(
-        #FilterListText
-        CASE WHEN(
-            COUNT(
-                CASE WHEN('$filterListText' = N'') THEN 1 ELSE(
-                    #FilterListText
-                    CASE WHEN(
-                        (
-                            (
-                                LOCATE(
-                                    (
-                                REPLACE
-                                    (ic.Label, N' ', N'')
-                                ),
-                                '$filterListText' #FilterListText
-                                ) -1
-                            )
-                        ) >(-1)
-                    ) THEN 1 ELSE 0
-                END
-            )
-        END
+( CASE WHEN ($filterListLength = 0) THEN 1 ELSE (
+    CASE WHEN (
+        (SELECT COUNT(DISTINCT(ic.Id)) FROM `IngredientCategory` ic
+	        LEFT JOIN `Ingredient` i ON
+    	        i.Category = ic.Id
+            LEFT JOIN `RecipeIngredient` ri ON
+    	        ri.IngredientId = i.Id
+            WHERE ri.RecipeId = r.Id 
+                AND ic.Id in $filterListIds
     ) = CAST($filterListLength AS UNSIGNED INTEGER)
-) THEN 1 ELSE 0 #FilterList.Length
+) THEN 1 ELSE 0
 END
 )
 END
@@ -113,28 +79,8 @@ WHERE
             (r.FoodCategoryId = $foodCategoryId) #FoodCategoryId, if not nullidentifier()
             AND(r.FoodCategoryId IS NOT NULL))
         END
-    ) AND(
-        (
-            CASE WHEN('$filterListText' = N'') THEN 1 ELSE(
-                #FilterListText
-                CASE WHEN(
-                    (
-                        (
-                            LOCATE(
-                                (
-                            REPLACE
-                                (ic.Label, N' ', N'')
-                            ),
-                            '$filterListText' #FilterListText
-                            ) -1
-                        )
-                    ) >(-1)
-                ) THEN 1 ELSE 0
-            END
-        )
-    END
-) = 1
-) AND(r.Name LIKE CONCAT(N'%', '$searchKeyWord', N'%')) #searchKeyWord
+    ) 
+    AND (r.Name LIKE CONCAT(N'%', '$searchKeyWord', N'%')) #searchKeyWord
 GROUP BY
     r.SubCategoryMainId,
     r.FoodCategoryId,
